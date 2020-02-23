@@ -6,8 +6,6 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 - Rozpoczynając pracę z projektem (wykorzystując virtualenv). Hermetyczne środowisko dla pojedynczej aplikacji w python-ie:
 
   ```
-  # centos, add to ~/.bashrc
-  $ source /usr/bin/virtualenvwrapper.sh
 
   # ubuntu, add to ~/.bashrc
   $ source /usr/local/bin/virtualenvwrapper.sh
@@ -16,6 +14,7 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
   $ mkvirtualenv wsb-simple-flask-app
   $ pip install -r requirements.txt
   $ pip install -r test_requirements.txt
+  #lub make deps
   ```
 
   Sprawdź: [documentację virtualenvwrappera](https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html)s oraz [biblioteki flask](http://flask.pocoo.org).
@@ -23,11 +22,16 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 - Uruchamianie applikacji:
 
   ```
-  # jako zwykły program
+  $ PYTHONPATH=. FLASK_APP=hello_world flask run
+  # to uruchamia aplikacje, blokuje terminal -> curl
+  #lub make run
+  #run:
+  	# PYTHONPATH=. FLASK_APP=hello_world flask run
+
+  # albo jako zwykły program
   $ python main.py
 
-  # albo:
-  $ PYTHONPATH=. FLASK_APP=hello_world flask run
+
   ```
 
 - Uruchamianie testów (see: http://doc.pytest.org/en/latest/capture.html):
@@ -36,6 +40,8 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
   $ PYTHONPATH=. py.test
   $ PYTHONPATH=. py.test  --verbose -s
   ```
+  # lub make test  -> Makefile
+
 
 - Kontynuując pracę z projektem, aktywowanie hermetycznego środowiska dla aplikacji py:
 
@@ -44,7 +50,6 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
   $ workon wsb-simple-flask-app
 
   ...
-
   # deaktywacja virtualenv
   $ deactivate
   ```
@@ -69,36 +74,7 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 
 - Instalacja dockera: [dockerce howto](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
-## Centos
 
-- Instalacja python virtualenv i virtualenvwrapper:
-
-  ```
-  $ yum install -y python-pip
-  $ pip install -U pip
-  $ pip install virtualenv
-  $ pip install virtualenvwrapper
-  ```
-
-- Instalacja docker-a:
-
-  ```
-  $ yum remove docker \
-        docker-common \
-        container-selinux \
-        docker-selinux \
-        docker-engine
-
-  $ yum install -y yum-utils
-
-  $ yum-config-manager \
-      --add-repo \
-      https://download.docker.com/linux/centos/docker-ce.repo
-
-  $ yum makecache fast
-  $ yum install -y docker-ce
-  $ systemctl start docker
-  ```
 
 # Materiały
 
